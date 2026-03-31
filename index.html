@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"; content="width=device-width, initial-scale=1.0">
+    <title>Beauty Business</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+           height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('background url.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 50px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            display: flex;
+            height: 80vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            margin: 15px 0;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #ff4d6d;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #e63950;
+        }
+
+        .section {
+            background: white;
+            color: black;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f4f4f4;
+            padding: 20px;
+            width: 250px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Beautybykgold</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Enhance Your Natural Beauty</h2>
+            <p>Premium skincare and beauty products designed just for you.</p>
+            <button class="btn"><a href="cart.html">Shop Now</a></button>
+        </div>
+    </div>
+
+    <section class="section" id="services">
+        <h2>Our Products</h2>s
+        <div class="services">
+            <div class="card">
+                <h3>Skincare</h3>
+                <p>Glow with our natural skincare products.</p>
+            </div>
+
+            <div class="card">
+                <h3>Haircare</h3>
+                <p>Healthy hair solutions for all types.</p>
+            </div>
+
+            <div class="card">
+                <h3>Gift Sets</h3>
+                <p>Perfect beauty packages for loved ones.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Facebook: Beautybykgold</p>
+        <p>Phone: +234 7069446555</p>
+    </section>
+
+    <footer>
+        <p>&copy; Beautybykgold. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

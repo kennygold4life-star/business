@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Beauty Store</title>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f8f8f8;
+}
+
+h1 {
+  text-align: center;
+  padding: 15px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
+
+.product {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+button {
+  padding: 8px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  padding: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🛍️ My Beauty Store</h1>
+
+<div class="products" id="products"></div>
+
+<div class="cart">
+  <span id="cart-count">0 items</span>
+  <button onclick="checkout()">Checkout on WhatsApp</button>
+</div>
+
+<script>
+const phoneNumber = "234XXXXXXXXXX"; // 👈 PUT YOUR WHATSAPP NUMBER
+
+const products = [
+  {
+    id: 1,
+    name: "Optimals Eye & Lip Cream",
+    price: 22500,
+    image: "optimals.jpeg"
+  },
+  {
+    id: 2,
+    name: "Feminelle Wash",
+    price: 15000,
+    image: "feminelle.jpeg"
+  },
+  {
+    id: 3,
+    name: "Perfume",
+    price: 60000,
+    image: "eclat.jpeg"
+  }
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Display products
+function displayProducts() {
+  const container = document.getElementById("products");
+
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="product">
+        <img src="${p.image}">
+        <h4>${p.name}</h4>
+        <p>₦${p.price.toLocaleString()}</p>
+        <button onclick="addToCart(${p.id})">Add</button>
+      </div>
+    `;
+  });
+}
+
+// Add to cart
+function addToCart(id) {
+  const item = cart.find(p => p.id === id);
+
+  if (item) {
+    item.qty++;
+  } else {
+    const product = products.find(p => p.id === id);
+    cart.push({...product, qty: 1});
+  }
+
+  saveCart();
+}
+
+// Save cart
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartUI();
+}
+
+// Update cart count
+function updateCartUI() {
+  let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cart-count").textContent =
+    totalItems + " item(s)";
+}
+
+// WhatsApp checkout
+function checkout() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  let message = "Hello, I want to order:\n\n";
+
+  let total = 0;
+
+  cart.forEach(item => {
+    message += `${item.name} x ${item.qty} = ₦${item.price * item.qty}\n`;
+    total += item.price * item.qty;
+  });
+
+  message += `\nTotal: ₦${total}`;
+
+  let url = `https://wa.me/${+2347069446555}?text=kennyfemcares enterprise{encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+}
+
+// Init
+displayProducts();
+updateCartUI();
+</script>
+
+</body>
+</html>

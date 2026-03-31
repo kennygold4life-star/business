@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2 id="welcomeMessage"></h2>
+<p id="result"></p>
+
+<script>
+    let username = localStorage.getItem("username");
+
+    if (username) {
+        document.getElementById("welcomeMessage").innerText = 
+            "Welcome, " + username + " 🎉";
+
+        document.getElementById("result").innerText = 
+            "Your login was successful!";
+    } else {
+        window.location.href = "index.html"; // go back if no login
+    }
+</script>
+
+</body>
+</html>

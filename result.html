@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Result</title>
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    img {
+      width: 120px;
+      margin-top: 20px;
+    }
+
+    .card {
+      border: 1px solid gold;
+      padding: 20px;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="badge.png" alt="School Badge">
+
+  <h1 id="welcome"></h1>
+
+  <div class="card">
+    <h2>Your Result</h2>
+    <p>Mathematics: 85</p>
+    <p>English: 78</p>
+    <p>Science: 88</p>
+    <p>Total: 251</p>
+  </div>
+
+  <script>
+    let name = localStorage.getItem("studentName");
+
+    if (name) {
+      document.getElementById("welcome").innerText =
+        "Welcome, " + name + " 🎉";
+    } else {
+      document.getElementById("welcome").innerText =
+        "Welcome Student 🎉";
+    }
+  </script>
+
+</body>
+</html>
