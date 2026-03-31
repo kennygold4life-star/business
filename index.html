@@ -1,168 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"; content="width=device-width, initial-scale=1.0">
-    <title>Beauty Business</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Beauty Store</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f8f8f8;
+}
 
-        body {
-           height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                        url('background url.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
+h1 {
+  text-align: center;
+  padding: 15px;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 50px;
-        }
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
 
-        header h1 {
-            font-size: 1.8rem;
-        }
+.product {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
-        nav a {
-            color: white;
-            margin-left: 20px;
-            text-decoration: none;
-        }
+.product img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+button {
+  padding: 8px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-        .hero {
-            display: flex;
-            height: 80vh;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-        }
-
-        .hero p {
-            margin: 15px 0;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            background: #ff4d6d;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #e63950;
-        }
-
-        .section {
-            background: white;
-            color: black;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .services {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: #f4f4f4;
-            padding: 20px;
-            width: 250px;
-            border-radius: 10px;
-        }
-
-        footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-    </style>
+.cart {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Beautybykgold</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+<h1>🛍️ My Beauty Store</h1>
 
-    <div class="hero">
-        <div class="hero-content">
-            <h2>Enhance Your Natural Beauty</h2>
-            <p>Premium skincare and beauty products designed just for you.</p>
-            <button class="btn"><a href="cart.html">Shop Now</a></button>
-        </div>
-    </div>
+<div class="products" id="products"></div>
 
-    <section class="section" id="services">
-        <h2>Our Products</h2>
-        <div class="services">
-            <div class="card">
-                <h3>Skincare</h3>
-                <p>Skincare is the daily practice of cleansing, nourishing, and protecting your skin to keep it healthy, glowing, and resilient.</p>
-            </div>
+<div class="cart">
+  <span id="cart-count">0 items</span>
+  <button onclick="checkout()">Checkout on WhatsApp</button>
+</div>
 
-            <div class="card">
-                <h3>Haircare</h3>
-                <p>Hair care involves keeping your hair healthy, strong, and vibrant through regular cleansing, conditioning, and using products suited to your hair type.</p>
-            </div>
+<script>
+const phoneNumber = "2347069446555"; // ✅ Your WhatsApp number
 
-            <div class="card">
-                <h3>Gift Sets</h3>
-                <p>Gift sets are thoughtfully curated collections of products designed to make gifting easy, meaningful, and perfect for any special occasion.</p>
-            </div>
-            <div class="card">
-                <h3>Body care </h3>
-                <p>Body care is the practice of maintaining healthy, clean, and nourished skin through proper hygiene, moisturizing, and the use of suitable personal care products.</p>
-            </div>
-            <div class="card">
-                <h3>Perfumes</h3>
-                <p>Perfume is a fragrant blend of essential oils and aromas designed to enhance your personal scent and leave a lasting impression.</p>
-            </div>
-        </div>
-    </section>
+const products = [
+  {
+    id: 1,
+    name: "Optimals Eye & Lip Cream",
+    price: 22500,
+    image: "optimals.jpeg"
+  },
+  {
+    id: 2,
+    name: "Feminelle Wash",
+    price: 15000,
+    image: "feminelle.jpeg"
+  },
+  {
+    id: 3,
+    name: "Perfume",
+    price: 60000,
+    image: "eclat.jpeg"
+  },
+  {
+    id: 4,
+    name: "Wellosophy Meal Replacement",
+    price: 150000,
+    image: "wellosophy meal.jpeg"
+  },
+  {
+    id: 5,
+    name: "Wellosophy Man and Woman",
+    price: 90000,
+    image: "wellosophy.jpeg"
+  }
+];
 
-    <section class="section" id="contact">
-        <h2>Contact Us</h2>
-        <p>Facebook: Beautybykgold</p>
-        <p>Phone: +234 7069446555</p>
-    </section>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    <footer>
-        <p>&copy; Beautybykgold. All rights reserved.</p>
-    </footer>
+// Display products
+function displayProducts() {
+  const container = document.getElementById("products");
+  container.innerHTML = ""; // جلوگیری duplicates
+
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="product">
+        <img src="${p.image}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <p>₦${p.price.toLocaleString()}</p>
+        <button onclick="addToCart(${p.id})">Add</button>
+      </div>
+    `;
+  });
+}
+
+// Add to cart
+function addToCart(id) {
+  const item = cart.find(p => p.id === id);
+
+  if (item) {
+    item.qty++;
+  } else {
+    const product = products.find(p => p.id === id);
+    cart.push({...product, qty: 1});
+  }
+
+  saveCart();
+}
+
+// Save cart
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartUI();
+}
+
+// Update cart count
+function updateCartUI() {
+  let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cart-count").textContent =
+    totalItems + " item(s)";
+}
+
+// WhatsApp checkout
+function checkout() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  let message = "Hello, I want to order:\n\n";
+  let total = 0;
+
+  cart.forEach(item => {
+    message += `${item.name} x ${item.qty} = ₦${(item.price * item.qty).toLocaleString()}\n`;
+    total += item.price * item.qty;
+  });
+
+  message += `\nTotal: ₦${total.toLocaleString()}`;
+
+  let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+}
+
+// Init
+displayProducts();
+updateCartUI();
+</script>
 
 </body>
 </html>
